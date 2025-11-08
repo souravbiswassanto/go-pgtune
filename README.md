@@ -23,7 +23,7 @@ go get github.com/souravbiswassanto/go-pgtune/pkg/pgtune
 ```bash
 git clone https://github.com/souravbiswassanto/go-pgtune.git
 cd go-pgtune
-go run server.go
+go run ./cmd/server
 ```
 
 ## Usage
@@ -65,7 +65,7 @@ func main() {
 
 Start the server:
 ```bash
-go run server.go
+go run ./cmd/server
 # Server starting on port 8080
 ```
 
@@ -175,7 +175,7 @@ max_wal_size = 4GB
 ## Running the Example
 
 ```bash
-go run example.go
+go run ./cmd/example
 ```
 
 ## Testing

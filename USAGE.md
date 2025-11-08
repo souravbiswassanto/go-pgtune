@@ -7,7 +7,7 @@
 The simplest way to see go-pgtune in action:
 
 ```bash
-go run example.go
+go run ./cmd/example
 ```
 
 Expected output:
@@ -38,7 +38,7 @@ max_wal_size = 4GB
 ### 2. Start the API Server
 
 ```bash
-go run server.go
+go run ./cmd/server
 ```
 
 Or using Make:

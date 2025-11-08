@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	pgtune "github.com/souravbiswassanto/go-pgtune/pkg/pgtune"
+	"github.com/souravbiswassanto/go-pgtune/pkg/pgtune"
 )
 
-// TuneRequest represents the API request body
 type TuneRequest struct {
 	DBVersion      float64 `json:"db_version"`
 	OSType         string  `json:"os_type"`
@@ -20,7 +20,6 @@ type TuneRequest struct {
 	StorageType    string  `json:"storage_type"`
 }
 
-// TuneResponse represents the API response
 type TuneResponse struct {
 	Success bool               `json:"success"`
 	Config  *pgtune.TuneOutput `json:"config,omitempty"`
@@ -44,7 +43,6 @@ func tuneHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Convert GB to bytes
 	totalMemoryBytes := int64(req.TotalMemoryGB * float64(pgtune.GB))
 
 	input := pgtune.TuneInput{
@@ -87,7 +85,7 @@ func main() {
 	http.HandleFunc("/health", healthHandler)
 
 	port := "8080"
-	if envPort := getEnv("PORT", ""); envPort != "" {
+	if envPort := os.Getenv("PORT"); envPort != "" {
 		port = envPort
 	}
 
@@ -98,9 +96,4 @@ func main() {
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal(err)
 	}
-}
-
-func getEnv(key, defaultValue string) string {
-	// Simple environment variable getter
-	return defaultValue
 }

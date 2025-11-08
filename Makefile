@@ -5,13 +5,13 @@ help: ## Display this help message
 @grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-15s %s\n", $$1, $$2}'
 
 build: ## Build the server binary
-go build -o bin/pgtune-server server.go
+go build -o bin/pgtune-server ./cmd/server
 
 run: ## Run the server
-go run server.go
+go run ./cmd/server
 
 example: ## Run the example program
-go run example.go
+go run ./cmd/example
 
 test: ## Run tests
 go test ./...
